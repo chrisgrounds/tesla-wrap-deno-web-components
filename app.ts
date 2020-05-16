@@ -10,7 +10,7 @@ class HomeResource extends Drash.Http.Resource {
 }
 
 const server = new Drash.Http.Server({
-  directory: "/Users/baconc01/tesla-deno-web-components",
+  directory: Deno.cwd(),
   response_output: "text/html",
   resources: [HomeResource],
   static_paths: ["/public"]
