@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla</title>
+</head>
+<body>
+    <tesla-img img-id="1"></tesla-img>
+    <tesla-img img-id="2"></tesla-img>
+</body>
+
+<script>
+  class TeslaImg extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+
+      const id = this.getAttribute('img-id');
+      
+      this.shadowRoot.innerHTML = `<style>img { height: 400px; width: 720px }</style><img src="./public/img/tesla_wrap_${id}.jpg" alt="Tesla wrap ${id}">`;
+    }
+  }
+
+  window.customElements.define("tesla-img", TeslaImg);
+</script>
+</html>
