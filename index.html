@@ -5,23 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tesla</title>
 </head>
-<body>
-    <tesla-img img-id="1"></tesla-img>
-    <tesla-img img-id="2"></tesla-img>
+<body style="height: 100%; margin: 0;">
+    <tesla-header></tesla-header>
+    <div style="display: flex; width: 100%; flex-direction: column; align-items: center; justify-content: center;">
+      <tesla-img img-id="1"></tesla-img>
+      <tesla-img img-id="2"></tesla-img>
+    </div>
 </body>
 
 <script>
-  class TeslaImg extends HTMLElement {
+  class Header extends HTMLElement {
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
 
-      const id = this.getAttribute('img-id');
-      
-      this.shadowRoot.innerHTML = `<style>img { height: 400px; width: 720px }</style><img src="./public/img/tesla_wrap_${id}.jpg" alt="Tesla wrap ${id}">`;
+      this.shadowRoot.innerHTML = `
+          <style>
+            .header {
+              background-color: black;
+            }
+            h1 {
+              color: #338bd5;
+              text-align: center;
+            }
+          </style>
+          <div class="header">
+            <h1>T 3 S L A Wraps</h1>
+          </div>
+        `
     }
   }
 
+  class TeslaImg extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: "open" });
+      
+      const id = this.getAttribute('img-id');
+      
+      this.shadowRoot.innerHTML = `
+        <style>
+          img { max-width: 720px; height: auto; margin: 0; }
+          @media all and (max-width: 700px) { img { max-width: 420px; } }
+        </style>
+        <img src="./public/img/tesla_wrap_${id}.jpg" alt="Tesla wrap ${id}">`;
+    }
+  }
+
+  window.customElements.define("tesla-header", Header);
   window.customElements.define("tesla-img", TeslaImg);
 </script>
 </html>
